@@ -1,13 +1,13 @@
 import React from "react";
 import { fetchUserPosts } from "../redux/userPosts/userPostsActions";
 import { connect } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SinglePost from "./SinglePost";
 
 const UserPosts = (props) => {
   const [postsVisibility, setPostsVisibility] = useState(false);
   const togglePosts = () => {
-    props.fetchUserPosts();
+    props?.fetchUserPosts();
     setPostsVisibility(!postsVisibility);
   };
   const styles = {
@@ -28,7 +28,7 @@ const UserPosts = (props) => {
       </button>
       {postsVisibility ? (
         <div id={`user${props?.userId}`}>
-          {props.userPostsData.userPosts
+          {props?.userPostsData?.userPosts
             ?.filter(({ userId }) => userId === props?.userId)
             .map(({ userId, id, title, body }) => (
               <SinglePost
@@ -47,7 +47,7 @@ const UserPosts = (props) => {
 
 const mapStateToProp = (state) => {
   return {
-    userPostsData: state.userPosts,
+    userPostsData: state?.userPosts,
   };
 };
 

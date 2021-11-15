@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "../redux/user/userActions";
 import UserPosts from "./UserPosts";
@@ -10,7 +9,6 @@ const User = ({ fetchUsers, userData }) => {
   };
 
   const { loading, users, error } = userData;
-  console.log("User Data:", userData);
 
   if (error) {
     return <div>Error! {error.message}</div>;
@@ -22,7 +20,7 @@ const User = ({ fetchUsers, userData }) => {
   return (
     <div>
       <div className="container">
-        {userData.users.length == 0 ? (
+        {users?.length === 0 ? (
           <button id="mainButton" onClick={handleClick}>
             Get Users List
           </button>
@@ -38,7 +36,7 @@ const User = ({ fetchUsers, userData }) => {
 
 const mapStateToProp = (state) => {
   return {
-    userData: state.user,
+    userData: state?.user,
   };
 };
 
